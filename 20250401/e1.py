@@ -2,23 +2,9 @@ import requests
 import html
 import pandas as pd
 from bs4 import BeautifulSoup
+import os
 
-def get_stop_info(stop_link:str) -> dict:
-
-    url = f'https://pda5284.gov.taipei/MQS/{stop_link}'
-
-    response = requests.get(url)
-    if response.status_code == 200:
-
-        # read id from url
-        stop_id = stop_link.split("=")[1]
-
-        with open(f"bus_stop_{stop_id}.html", "w", encoding="utf-8") as file:
-            file.write(response.text)
-
-        print(f"網頁已成功下載並儲存為 bus_{stop_link}.html")
-    else:
-        print(f"無法下載網頁，HTTP 狀態碼: {response.status_code}") 
+url = '''https://pda5284.gov.taipei/MQS/route.jsp?rid=10417'''
 
 # 發送 GET 請求
 response = requests.get(url)
@@ -55,7 +41,8 @@ if response.status_code == 200:
             if td:
                 stop_name = html.unescape(td.text.strip())  # 解碼站點名稱
                 stop_link = td.find("a")["href"] if td.find("a") else None
-                rows_go.append({"站點名稱": stop_name, "連結": stop_link})
+                stop_URL = f"https://pda5284.gov.taipei/MQS/{stop_link}" if stop_link else None
+                rows_go.append({"站點名稱": stop_name, "連結": stop_link, "stop_URL": stop_URL})
         if rows_go:
             df_go = pd.DataFrame(rows_go)
 
@@ -66,7 +53,8 @@ if response.status_code == 200:
             if td:
                 stop_name = html.unescape(td.text.strip())  # 解碼站點名稱
                 stop_link = td.find("a")["href"] if td.find("a") else None
-                rows_back.append({"站點名稱": stop_name, "連結": stop_link})
+                stop_URL = f"https://pda5284.gov.taipei/MQS/{stop_link}" if stop_link else None
+                rows_back.append({"站點名稱": stop_name, "連結": stop_link, "stop_URL": stop_URL})
         if rows_back:
             df_back = pd.DataFrame(rows_back)
 
@@ -82,5 +70,16 @@ if response.status_code == 200:
         print(df_back)
     else:
         print("未找到返程資料。")
+
+    # 將 stop_URL 存到檔案
+    output_file = "C:\\Users\\User\\Desktop\\cycu_oop_11372009\\BUS_URL"
+    with open(output_file, "w", encoding="utf-8") as file:
+        if df_go is not None:
+            file.write("去程:\n")
+            file.writelines("\n".join(df_go["stop_URL"].dropna()) + "\n")
+        if df_back is not None:
+            file.write("\n返程:\n")
+            file.writelines("\n".join(df_back["stop_URL"].dropna()) + "\n")
+    print(f"所有 stop_URL 已存到 {output_file}")
 else:
     print(f"無法下載網頁，HTTP 狀態碼: {response.status_code}")

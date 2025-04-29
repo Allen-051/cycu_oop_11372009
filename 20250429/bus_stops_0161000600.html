@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_71e92519e8dbf4950af0fa3c5a13c213 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_71e92519e8dbf4950af0fa3c5a13c213" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_71e92519e8dbf4950af0fa3c5a13c213 = L.map(
+                "map_71e92519e8dbf4950af0fa3c5a13c213",
+                {
+                    center: [25.033, 121.5654],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_930f4229a101d1d2ad134a2192663ec9 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_930f4229a101d1d2ad134a2192663ec9.addTo(map_71e92519e8dbf4950af0fa3c5a13c213);
+        
+    
+
+        function geo_json_a481f271d9153b6e2e7c90b452d4de8d_onEachFeature(feature, layer) {
+            layer.on({
+            });
+        };
+        var geo_json_a481f271d9153b6e2e7c90b452d4de8d = L.geoJson(null, {
+                onEachFeature: geo_json_a481f271d9153b6e2e7c90b452d4de8d_onEachFeature,
+            
+            ...{
+}
+        });
+
+        function geo_json_a481f271d9153b6e2e7c90b452d4de8d_add (data) {
+            geo_json_a481f271d9153b6e2e7c90b452d4de8d
+                .addData(data);
+        }
+            geo_json_a481f271d9153b6e2e7c90b452d4de8d_add({"features": [{"geometry": {"coordinates": [121.5393498, 25.113531], "type": "Point"}, "properties": {"stop_id": "1116200600", "stop_name": "\u8077\u80fd\u767c\u5c55\u5b78\u9662\u4e8c", "stop_number": "1", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.53922, 25.11433], "type": "Point"}, "properties": {"stop_id": "1115400400", "stop_name": "\u8077\u80fd\u767c\u5c55\u5b78\u9662", "stop_number": "2", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5391643, 25.115876], "type": "Point"}, "properties": {"stop_id": "1115300600", "stop_name": "\u6771\u5c71\u8def", "stop_number": "3", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.53683, 25.11823], "type": "Point"}, "properties": {"stop_id": "1115300260", "stop_name": "\u5929\u6bcd\u570b\u4e2d", "stop_number": "4", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.53544, 25.118235], "type": "Point"}, "properties": {"stop_id": "1115300560", "stop_name": "\u5fe0\u8aa0\u8def\u53e3", "stop_number": "5", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5311071, 25.118238], "type": "Point"}, "properties": {"stop_id": "1115300060", "stop_name": "\u4e09\u7389\u5bae", "stop_number": "6", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.53084, 25.11927], "type": "Point"}, "properties": {"stop_id": "1115600500", "stop_name": "\u5929\u6bcd\u5ee3\u5834", "stop_number": "7", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5315658, 25.121299], "type": "Point"}, "properties": {"stop_id": "1115200200", "stop_name": "\u5929\u6bcd\u65b0\u6751", "stop_number": "8", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.53273, 25.12424], "type": "Point"}, "properties": {"stop_id": "1115100100", "stop_name": "\u5929\u6bcd", "stop_number": "9", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.53245, 25.124204], "type": "Point"}, "properties": {"stop_id": "1115600040", "stop_name": "\u5929\u6bcd", "stop_number": "10", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.53187, 25.12262], "type": "Point"}, "properties": {"stop_id": "1115600740", "stop_name": "\u8fb2\u8a13\u5354\u6703", "stop_number": "11", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5313484, 25.121246], "type": "Point"}, "properties": {"stop_id": "1115600440", "stop_name": "\u5929\u6bcd\u65b0\u6751", "stop_number": "12", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.530609, 25.119324], "type": "Point"}, "properties": {"stop_id": "1115200340", "stop_name": "\u5929\u6bcd\u5ee3\u5834", "stop_number": "13", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.52797, 25.11588], "type": "Point"}, "properties": {"stop_id": "1115500040", "stop_name": "\u53f0\u5317\u7f8e\u570b/\u65e5\u50d1\u5b78\u6821", "stop_number": "14", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5270405, 25.114118], "type": "Point"}, "properties": {"stop_id": "1115500440", "stop_name": "\u8cf4\u539d", "stop_number": "15", "stop_time": "\u5c1a\u672a\u767c\u8eca"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5257238, 25.111519], "type": "Point"}, "properties": {"stop_id": "1115200140", "stop_name": "\u58eb\u6771\u570b\u5c0f", "stop_number": "16", "stop_time": "\u9032\u7ad9\u4e2d"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5250351, 25.108312], "type": "Point"}, "properties": {"stop_id": "1116100040", "stop_name": "\u514b\u5f37\u6e38\u6cf3\u6c60", "stop_number": "17", "stop_time": "\u9032\u7ad9\u4e2d"}, "type": "Feature"}, {"geometry": {"coordinates": [121.524661, 25.105356], "type": "Point"}, "properties": {"stop_id": "1115500140", "stop_name": "\u58eb\u6797\u96fb\u6a5f(\u4e2d\u5c71\u5fb7\u884c\u8def\u53e3)", "stop_number": "18", "stop_time": "3\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.524957, 25.103354], "type": "Point"}, "properties": {"stop_id": "1115500340", "stop_name": "\u5fb7\u884c(\u4e2d\u5c71\u5fe0\u8aa0\u8def\u53e3)", "stop_number": "19", "stop_time": "5\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.527411, 25.097079], "type": "Point"}, "properties": {"stop_id": "1114100640", "stop_name": "\u798f\u6797\u6a4b", "stop_number": "20", "stop_time": "7\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5277552, 25.093012], "type": "Point"}, "properties": {"stop_id": "1116300940", "stop_name": "\u6377\u904b\u58eb\u6797\u7ad9(\u4e2d\u5c71)", "stop_number": "21", "stop_time": "10\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5273919, 25.090699], "type": "Point"}, "properties": {"stop_id": "1116300740", "stop_name": "\u53f0\u96fb\u53f0\u5317\u5317\u5340\u71df\u696d\u8655", "stop_number": "22", "stop_time": "11\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5268976, 25.087885], "type": "Point"}, "properties": {"stop_id": "1114100740", "stop_name": "\u9298\u50b3\u5927\u5b78", "stop_number": "23", "stop_time": "12\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.525327, 25.085353], "type": "Point"}, "properties": {"stop_id": "1116301040", "stop_name": "\u6377\u904b\u528d\u6f6d\u7ad9(\u4e2d\u5c71)", "stop_number": "24", "stop_time": "13\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5247122, 25.081759], "type": "Point"}, "properties": {"stop_id": "1046100340", "stop_name": "\u528d\u6f6d", "stop_number": "25", "stop_time": "16\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5230951, 25.070066], "type": "Point"}, "properties": {"stop_id": "1046100240", "stop_name": "\u81fa\u5317\u5e02\u7acb\u7f8e\u8853\u9928", "stop_number": "26", "stop_time": "\u9032\u7ad9\u4e2d"}, "type": "Feature"}, {"geometry": {"coordinates": [121.52244, 25.0673], "type": "Point"}, "properties": {"stop_id": "1046100040", "stop_name": "\u5927\u540c\u5927\u5b78", "stop_number": "27", "stop_time": "\u9032\u7ad9\u4e2d"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5221621, 25.064381], "type": "Point"}, "properties": {"stop_id": "1045300040", "stop_name": "\u5927\u540c\u516c\u53f8(\u6674\u5149\u5e02\u5834)", "stop_number": "28", "stop_time": "\u9032\u7ad9\u4e2d"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5227767, 25.06083], "type": "Point"}, "properties": {"stop_id": "1044900140", "stop_name": "\u53f0\u6ce5\u5927\u6a13(\u99ac\u5055\u91ab\u9662)", "stop_number": "29", "stop_time": "5\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5226289, 25.056427], "type": "Point"}, "properties": {"stop_id": "1044800240", "stop_name": "\u570b\u8cd3\u98ef\u5e97", "stop_number": "30", "stop_time": "7\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5220211, 25.051264], "type": "Point"}, "properties": {"stop_id": "1044400040", "stop_name": "\u4e2d\u5c71\u5e02\u5834", "stop_number": "31", "stop_time": "11\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5197596, 25.046484], "type": "Point"}, "properties": {"stop_id": "1004100540", "stop_name": "\u884c\u653f\u9662", "stop_number": "32", "stop_time": "4\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5167218, 25.04654], "type": "Point"}, "properties": {"stop_id": "1004100760", "stop_name": "\u81fa\u5317\u8eca\u7ad9(\u5fe0\u5b5d)", "stop_number": "33", "stop_time": "5\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5091441, 25.045511], "type": "Point"}, "properties": {"stop_id": "1084300040", "stop_name": "\u4e2d\u83ef\u8def\u5317\u7ad9", "stop_number": "34", "stop_time": "\u9032\u7ad9\u4e2d"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5082667, 25.042516], "type": "Point"}, "properties": {"stop_id": "1084400340", "stop_name": "\u6377\u904b\u897f\u9580\u7ad9", "stop_number": "35", "stop_time": "\u9032\u7ad9\u4e2d"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5069037, 25.037868], "type": "Point"}, "properties": {"stop_id": "1085000040", "stop_name": "\u5c0f\u5357\u9580", "stop_number": "36", "stop_time": "4\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5065075, 25.036493], "type": "Point"}, "properties": {"stop_id": "1006500140", "stop_name": "\u806f\u5408\u91ab\u9662\u548c\u5e73\u9662\u5340", "stop_number": "37", "stop_time": "5\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5044162, 25.032074], "type": "Point"}, "properties": {"stop_id": "1086200040", "stop_name": "\u5927\u57d4\u8857", "stop_number": "38", "stop_time": "8\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.50438, 25.02966], "type": "Point"}, "properties": {"stop_id": "1088000140", "stop_name": "\u5ec8\u5b89\u91cc", "stop_number": "39", "stop_time": "10\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5054653, 25.028384], "type": "Point"}, "properties": {"stop_id": "1088000040", "stop_name": "\u5357\u6a5f\u5834\u516c\u5bd3", "stop_number": "40", "stop_time": "11\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5064379, 25.027343], "type": "Point"}, "properties": {"stop_id": "1088100040", "stop_name": "\u4e2d\u83ef\u5357\u6d77\u8def\u53e3", "stop_number": "41", "stop_time": "12\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.508316, 25.025621], "type": "Point"}, "properties": {"stop_id": "1088100240", "stop_name": "\u570b\u8208\u8def\u53e3", "stop_number": "42", "stop_time": "14\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.509833, 25.024664], "type": "Point"}, "properties": {"stop_id": "1088200020", "stop_name": "\u53e4\u4ead\u570b\u4e2d", "stop_number": "43", "stop_time": "15\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.50982, 25.02391], "type": "Point"}, "properties": {"stop_id": "1007200140", "stop_name": "\u842c\u83ef\u91ab\u9662", "stop_number": "44", "stop_time": "16\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.50643, 25.02149], "type": "Point"}, "properties": {"stop_id": "1088200160", "stop_name": "\u9752\u5e74\u516c\u5712(\u4ea4\u901a\u6559\u5b78\u5340)", "stop_number": "45", "stop_time": "17\u5206\u9418"}, "type": "Feature"}, {"geometry": {"coordinates": [121.5039, 25.02023], "type": "Point"}, "properties": {"stop_id": "1088200200", "stop_name": "\u9752\u5e74\u516c\u5712(\u99ac\u5834\u753a)", "stop_number": "46", "stop_time": "18\u5206\u9418"}, "type": "Feature"}], "type": "FeatureCollection"});
+        geo_json_a481f271d9153b6e2e7c90b452d4de8d.setStyle(function(feature) {return feature.properties.style;});
+
+        
+    
+            geo_json_a481f271d9153b6e2e7c90b452d4de8d.addTo(map_71e92519e8dbf4950af0fa3c5a13c213);
+        
+    
+            var layer_control_149c806c9d5670a42e3f421faa229c67_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_930f4229a101d1d2ad134a2192663ec9,
+                },
+                overlays :  {
+                    "Bus Stops" : geo_json_a481f271d9153b6e2e7c90b452d4de8d,
+                },
+            };
+            let layer_control_149c806c9d5670a42e3f421faa229c67 = L.control.layers(
+                layer_control_149c806c9d5670a42e3f421faa229c67_layers.base_layers,
+                layer_control_149c806c9d5670a42e3f421faa229c67_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_71e92519e8dbf4950af0fa3c5a13c213);
+
+        
+</script>
+</html>

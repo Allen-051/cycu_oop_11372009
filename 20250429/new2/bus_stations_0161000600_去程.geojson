@@ -1,0 +1,833 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5393498,
+          25.113531
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "1",
+        "stop_name": "職能發展學院二",
+        "stop_id": "1116200600",
+        "latitude": 25.113531,
+        "longitude": 121.5393498
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.53922,
+          25.11433
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "2",
+        "stop_name": "職能發展學院",
+        "stop_id": "1115400400",
+        "latitude": 25.11433,
+        "longitude": 121.53922
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5391643,
+          25.115876
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "3",
+        "stop_name": "東山路",
+        "stop_id": "1115300600",
+        "latitude": 25.115876,
+        "longitude": 121.5391643
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.53683,
+          25.11823
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "4",
+        "stop_name": "天母國中",
+        "stop_id": "1115300260",
+        "latitude": 25.11823,
+        "longitude": 121.53683
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.53544,
+          25.118235
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "5",
+        "stop_name": "忠誠路口",
+        "stop_id": "1115300560",
+        "latitude": 25.118235,
+        "longitude": 121.53544
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5311071,
+          25.118238
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "6",
+        "stop_name": "三玉宮",
+        "stop_id": "1115300060",
+        "latitude": 25.118238,
+        "longitude": 121.5311071
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.53084,
+          25.11927
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "7",
+        "stop_name": "天母廣場",
+        "stop_id": "1115600500",
+        "latitude": 25.11927,
+        "longitude": 121.53084
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5315658,
+          25.121299
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "8",
+        "stop_name": "天母新村",
+        "stop_id": "1115200200",
+        "latitude": 25.121299,
+        "longitude": 121.5315658
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.53273,
+          25.12424
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "9",
+        "stop_name": "天母",
+        "stop_id": "1115100100",
+        "latitude": 25.12424,
+        "longitude": 121.53273
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.53245,
+          25.124204
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "10",
+        "stop_name": "天母",
+        "stop_id": "1115600040",
+        "latitude": 25.124204,
+        "longitude": 121.53245
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.53187,
+          25.12262
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "11",
+        "stop_name": "農訓協會",
+        "stop_id": "1115600740",
+        "latitude": 25.12262,
+        "longitude": 121.53187
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5313484,
+          25.121246
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "12",
+        "stop_name": "天母新村",
+        "stop_id": "1115600440",
+        "latitude": 25.121246,
+        "longitude": 121.5313484
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.530609,
+          25.119324
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "13",
+        "stop_name": "天母廣場",
+        "stop_id": "1115200340",
+        "latitude": 25.119324,
+        "longitude": 121.530609
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.52797,
+          25.11588
+        ]
+      },
+      "properties": {
+        "stop_time": "尚未發車",
+        "stop_number": "14",
+        "stop_name": "台北美國/日僑學校",
+        "stop_id": "1115500040",
+        "latitude": 25.11588,
+        "longitude": 121.52797
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5270405,
+          25.114118
+        ]
+      },
+      "properties": {
+        "stop_time": "進站中",
+        "stop_number": "15",
+        "stop_name": "賴厝",
+        "stop_id": "1115500440",
+        "latitude": 25.114118,
+        "longitude": 121.5270405
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5257238,
+          25.111519
+        ]
+      },
+      "properties": {
+        "stop_time": "進站中",
+        "stop_number": "16",
+        "stop_name": "士東國小",
+        "stop_id": "1115200140",
+        "latitude": 25.111519,
+        "longitude": 121.5257238
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5250351,
+          25.108312
+        ]
+      },
+      "properties": {
+        "stop_time": "3分鐘",
+        "stop_number": "17",
+        "stop_name": "克強游泳池",
+        "stop_id": "1116100040",
+        "latitude": 25.108312,
+        "longitude": 121.5250351
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.524661,
+          25.105356
+        ]
+      },
+      "properties": {
+        "stop_time": "5分鐘",
+        "stop_number": "18",
+        "stop_name": "士林電機(中山德行路口)",
+        "stop_id": "1115500140",
+        "latitude": 25.105356,
+        "longitude": 121.524661
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.524957,
+          25.103354
+        ]
+      },
+      "properties": {
+        "stop_time": "7分鐘",
+        "stop_number": "19",
+        "stop_name": "德行(中山忠誠路口)",
+        "stop_id": "1115500340",
+        "latitude": 25.103354,
+        "longitude": 121.524957
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.527411,
+          25.097079
+        ]
+      },
+      "properties": {
+        "stop_time": "8分鐘",
+        "stop_number": "20",
+        "stop_name": "福林橋",
+        "stop_id": "1114100640",
+        "latitude": 25.097079,
+        "longitude": 121.527411
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5277552,
+          25.093012
+        ]
+      },
+      "properties": {
+        "stop_time": "進站中",
+        "stop_number": "21",
+        "stop_name": "捷運士林站(中山)",
+        "stop_id": "1116300940",
+        "latitude": 25.093012,
+        "longitude": 121.5277552
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5273919,
+          25.090699
+        ]
+      },
+      "properties": {
+        "stop_time": "進站中",
+        "stop_number": "22",
+        "stop_name": "台電台北北區營業處",
+        "stop_id": "1116300740",
+        "latitude": 25.090699,
+        "longitude": 121.5273919
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5268976,
+          25.087885
+        ]
+      },
+      "properties": {
+        "stop_time": "3分鐘",
+        "stop_number": "23",
+        "stop_name": "銘傳大學",
+        "stop_id": "1114100740",
+        "latitude": 25.087885,
+        "longitude": 121.5268976
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.525327,
+          25.085353
+        ]
+      },
+      "properties": {
+        "stop_time": "4分鐘",
+        "stop_number": "24",
+        "stop_name": "捷運劍潭站(中山)",
+        "stop_id": "1116301040",
+        "latitude": 25.085353,
+        "longitude": 121.525327
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5247122,
+          25.081759
+        ]
+      },
+      "properties": {
+        "stop_time": "5分鐘",
+        "stop_number": "25",
+        "stop_name": "劍潭",
+        "stop_id": "1046100340",
+        "latitude": 25.081759,
+        "longitude": 121.5247122
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5230951,
+          25.070066
+        ]
+      },
+      "properties": {
+        "stop_time": "8分鐘",
+        "stop_number": "26",
+        "stop_name": "臺北市立美術館",
+        "stop_id": "1046100240",
+        "latitude": 25.070066,
+        "longitude": 121.5230951
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.52244,
+          25.0673
+        ]
+      },
+      "properties": {
+        "stop_time": "10分鐘",
+        "stop_number": "27",
+        "stop_name": "大同大學",
+        "stop_id": "1046100040",
+        "latitude": 25.0673,
+        "longitude": 121.52244
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5221621,
+          25.064381
+        ]
+      },
+      "properties": {
+        "stop_time": "11分鐘",
+        "stop_number": "28",
+        "stop_name": "大同公司(晴光市場)",
+        "stop_id": "1045300040",
+        "latitude": 25.064381,
+        "longitude": 121.5221621
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5227767,
+          25.06083
+        ]
+      },
+      "properties": {
+        "stop_time": "14分鐘",
+        "stop_number": "29",
+        "stop_name": "台泥大樓(馬偕醫院)",
+        "stop_id": "1044900140",
+        "latitude": 25.06083,
+        "longitude": 121.5227767
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5226289,
+          25.056427
+        ]
+      },
+      "properties": {
+        "stop_time": "進站中",
+        "stop_number": "30",
+        "stop_name": "國賓飯店",
+        "stop_id": "1044800240",
+        "latitude": 25.056427,
+        "longitude": 121.5226289
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5220211,
+          25.051264
+        ]
+      },
+      "properties": {
+        "stop_time": "3分鐘",
+        "stop_number": "31",
+        "stop_name": "中山市場",
+        "stop_id": "1044400040",
+        "latitude": 25.051264,
+        "longitude": 121.5220211
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5197596,
+          25.046484
+        ]
+      },
+      "properties": {
+        "stop_time": "6分鐘",
+        "stop_number": "32",
+        "stop_name": "行政院",
+        "stop_id": "1004100540",
+        "latitude": 25.046484,
+        "longitude": 121.5197596
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5167218,
+          25.04654
+        ]
+      },
+      "properties": {
+        "stop_time": "7分鐘",
+        "stop_number": "33",
+        "stop_name": "臺北車站(忠孝)",
+        "stop_id": "1004100760",
+        "latitude": 25.04654,
+        "longitude": 121.5167218
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5091441,
+          25.045511
+        ]
+      },
+      "properties": {
+        "stop_time": "11分鐘",
+        "stop_number": "34",
+        "stop_name": "中華路北站",
+        "stop_id": "1084300040",
+        "latitude": 25.045511,
+        "longitude": 121.5091441
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5082667,
+          25.042516
+        ]
+      },
+      "properties": {
+        "stop_time": "12分鐘",
+        "stop_number": "35",
+        "stop_name": "捷運西門站",
+        "stop_id": "1084400340",
+        "latitude": 25.042516,
+        "longitude": 121.5082667
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5069037,
+          25.037868
+        ]
+      },
+      "properties": {
+        "stop_time": "15分鐘",
+        "stop_number": "36",
+        "stop_name": "小南門",
+        "stop_id": "1085000040",
+        "latitude": 25.037868,
+        "longitude": 121.5069037
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5065075,
+          25.036493
+        ]
+      },
+      "properties": {
+        "stop_time": "16分鐘",
+        "stop_number": "37",
+        "stop_name": "聯合醫院和平院區",
+        "stop_id": "1006500140",
+        "latitude": 25.036493,
+        "longitude": 121.5065075
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5044162,
+          25.032074
+        ]
+      },
+      "properties": {
+        "stop_time": "18分鐘",
+        "stop_number": "38",
+        "stop_name": "大埔街",
+        "stop_id": "1086200040",
+        "latitude": 25.032074,
+        "longitude": 121.5044162
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.50438,
+          25.02966
+        ]
+      },
+      "properties": {
+        "stop_time": "20分鐘",
+        "stop_number": "39",
+        "stop_name": "廈安里",
+        "stop_id": "1088000140",
+        "latitude": 25.02966,
+        "longitude": 121.50438
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5054653,
+          25.028384
+        ]
+      },
+      "properties": {
+        "stop_time": "20分鐘",
+        "stop_number": "40",
+        "stop_name": "南機場公寓",
+        "stop_id": "1088000040",
+        "latitude": 25.028384,
+        "longitude": 121.5054653
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5064379,
+          25.027343
+        ]
+      },
+      "properties": {
+        "stop_time": "21分鐘",
+        "stop_number": "41",
+        "stop_name": "中華南海路口",
+        "stop_id": "1088100040",
+        "latitude": 25.027343,
+        "longitude": 121.5064379
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.508316,
+          25.025621
+        ]
+      },
+      "properties": {
+        "stop_time": "22分鐘",
+        "stop_number": "42",
+        "stop_name": "國興路口",
+        "stop_id": "1088100240",
+        "latitude": 25.025621,
+        "longitude": 121.508316
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.509833,
+          25.024664
+        ]
+      },
+      "properties": {
+        "stop_time": "23分鐘",
+        "stop_number": "43",
+        "stop_name": "古亭國中",
+        "stop_id": "1088200020",
+        "latitude": 25.024664,
+        "longitude": 121.509833
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.50982,
+          25.02391
+        ]
+      },
+      "properties": {
+        "stop_time": "進站中",
+        "stop_number": "44",
+        "stop_name": "萬華醫院",
+        "stop_id": "1007200140",
+        "latitude": 25.02391,
+        "longitude": 121.50982
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.50643,
+          25.02149
+        ]
+      },
+      "properties": {
+        "stop_time": "進站中",
+        "stop_number": "45",
+        "stop_name": "青年公園(交通教學區)",
+        "stop_id": "1088200160",
+        "latitude": 25.02149,
+        "longitude": 121.50643
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.5039,
+          25.02023
+        ]
+      },
+      "properties": {
+        "stop_time": "進站中",
+        "stop_number": "46",
+        "stop_name": "青年公園(馬場町)",
+        "stop_id": "1088200200",
+        "latitude": 25.02023,
+        "longitude": 121.5039
+      }
+    }
+  ]
+}

@@ -222,7 +222,7 @@ if __name__ == "__main__":
         print(f"你選擇的小人站牌是：{selected_stop_name}")
 
         person_icon_path = "person_icon.png"
-        bus_icon_path = "C:\\Users\\User\\Desktop\\cycu_oop_11372009\\20250429\\bus_icon.png"
+        bus_icon_path = "C:\\Users\\CYCU\\Desktop\\bus_test\\bus_icon.png"
         output_html = os.path.join(output_dir, f"bus_stops_{route_id}_{direction}_with_person_and_bus.html")
 
         plot_interactive_map_with_person_and_bus(

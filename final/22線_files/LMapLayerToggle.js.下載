@@ -1,0 +1,163 @@
+﻿var YoubikeFetchIntervalId = null;
+var NewbikeFetchIntervalId = null;
+var YoubikeFeatures;
+var NewbikeFeatures;
+
+function YoubikeFetch() {
+    if (typeof (map) !== undefined && YoubikeFetchIntervalId === null) {
+        (function startFatch() {
+            $.ajax({
+                url: SitePath + 'Bike/YouBike',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    '__RequestVerificationToken': $('input[name=__RequestVerificationToken]').val(),
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                beforeSend: function () {
+                    removeFeatures(YoubikeFeatures);
+                },
+                error: function (response) {
+                },
+                success: function (response) {
+                    YoubikeFeatures = loadGeoJson(response);
+                },
+                complete: function () {
+                }
+            });
+            if (YoubikeFetchIntervalId === null) {
+                YoubikeFetchIntervalId = window.setInterval(startFatch, 1000 * 60 * 5);
+            }
+        })();
+        
+    }
+}
+
+function StopFetchYoubike() {
+    clearInterval(YoubikeFetchIntervalId);
+    YoubikeFetchIntervalId = null;
+    removeFeatures(YoubikeFeatures);
+}
+
+function NewbikeFetch() {
+    if (typeof (map) !== undefined && NewbikeFetchIntervalId === null) {
+        (function startFatch() {
+            $.ajax({
+                url: SitePath + 'Bike/NewBike',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    '__RequestVerificationToken': $('input[name=__RequestVerificationToken]').val(),
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                beforeSend: function () {
+                    removeFeatures(NewbikeFeatures);
+                },
+                error: function (response) {
+                },
+                success: function (response) {
+                    NewbikeFeatures = loadGeoJson(response);
+                },
+                complete: function () {
+                }
+            });
+            if (NewbikeFetchIntervalId === null) {
+                NewbikeFetchIntervalId = window.setInterval(startFatch, 1000 * 60 * 2);
+            }
+        })();
+        
+    }
+}
+
+function StopFetchNewbike() {
+    clearInterval(NewbikeFetchIntervalId);
+    NewbikeFetchIntervalId = null;
+    removeFeatures(NewbikeFeatures);
+}
+
+
+/**
+ * Load GeoJson string to map
+ * @param (string) geoString
+ */
+function loadGeoJson(geoJson) {
+
+
+    var features = L.geoJSON(geoJson, {
+        pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, { icon:  L.icon({
+                iconUrl: SitePath + feature.properties.iconpath
+            })
+            });
+        }
+    }).addTo(map);
+    //setMapdataStyle();
+    //bindMapdataAction();
+    //zoom(map);
+
+    return features;
+}
+
+function removeFeatures(features) {
+    //if (features && features !== undefined) {
+    //    for (var i = 0; i < features.length; i++)
+    //        map.data.remove(features[i]);
+    //}
+    if (features && features !== undefined) {
+        map.removeLayer(features);
+    }
+}
+
+function setMapdataStyle() {
+    if (map.data.getStyle() === undefined) {
+        map.data.setStyle(function (feature) {
+            return {
+                icon: SitePath + feature.getProperty('iconpath'),
+                title: feature.getProperty('name')
+            };
+        });
+    }
+}
+
+//////////function bindMapdataAction() {
+//////////    map.data.addListener('click', function (event) {
+//////////        InfoWindow.setOptions({
+//////////            pixelOffset: new google.maps.Size(0,-30),
+//////////            content: event.feature.getProperty('info'),
+//////////            position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+//////////        });
+//////////        InfoWindow.open(map);
+//////////    });
+//////////}
+
+/**
+ * Update a map's viewport to fit each geometry in a dataset
+ * @param {google.maps.Map} map The map to adjust
+ */
+////////function zoom(map) {
+////////    var bounds = new google.maps.LatLngBounds();
+////////    map.data.forEach(function (feature) {
+////////        processPoints(feature.getGeometry(), bounds.extend, bounds);
+////////    });
+////////    map.fitBounds(bounds);
+////////}
+
+/**
+ * Process each point in a Geometry, regardless of how deep the points may lie.
+ * @param {google.maps.Data.Geometry} geometry The structure to process
+ * @param {function(google.maps.LatLng)} callback A function to call on each
+ *     LatLng point encountered (e.g. Array.push)
+ * @param {Object} thisArg The value of 'this' as provided to 'callback' (e.g.
+ *     myArray)
+ */
+////////function processPoints(geometry, callback, thisArg) {
+////////    if (geometry instanceof google.maps.LatLng) {
+////////        callback.call(thisArg, geometry);
+////////    } else if (geometry instanceof google.maps.Data.Point) {
+////////        callback.call(thisArg, geometry.get());
+////////    } else {
+////////        geometry.getArray().forEach(function (g) {
+////////            processPoints(g, callback, thisArg);
+////////        });
+////////    }
+////////}

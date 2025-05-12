@@ -1,0 +1,1 @@
+function ConvertETA(n){return n<0?i18n._("Bus at depot"):n>=0&&n<=180?i18n._("Coming Soon"):n===65535?i18n._("Bus at depot"):n===65534?i18n._("Service Over"):n===65533?i18n._("Rerouted"):n===65532?i18n._("No Service"):n===65529?i18n._("Waiting Departure"):n===65531?"客滿":n===65530?i18n._("No Matches"):Math.floor(n/60)}

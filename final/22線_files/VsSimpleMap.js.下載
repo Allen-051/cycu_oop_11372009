@@ -1,0 +1,279 @@
+﻿var AptsBusMap = (function () {
+    var _AptsSpringWebHome;
+    var _uniRouteId;
+    var _goBack;
+    var _mapContainerId;
+    var _updateRouteInfoTimer;
+    var _isAjaxLoading = false;
+    var _CarCount = [];
+
+    function initRouteInfoToggle() {
+        $('#aRouteInfo').click(function () {
+            if ($('#pl_route_info:visible').length) {
+                $("#pl_route_info").hide("slow", function () {
+                    $("#aRouteInfoMark").text("+");
+                });
+            }
+            else {
+                $("#pl_route_info").show("slow", function () {
+                    $("#aRouteInfoMark").text("-");
+                });
+            }
+        });
+        $('#aRouteMemo').click(function () {
+            if ($('#pl_route_memo:visible').length) {
+                $("#pl_route_memo").hide("slow", function () {
+                    $("#aRouteMemoMark").text("+");
+                });
+            }
+            else {
+                $("#pl_route_memo").show("slow", function () {
+                    $("#aRouteMemoMark").text("-");
+                });
+            }
+        });
+    }
+
+    function displayBusTw2(io, idx, oBusInfo) {
+        bpnId = (io == "i") ? "#bni_" + idx : "#bno_" + idx;
+        busIconId = (io == "i") ? "#busi_" + idx : "#buso_" + idx;
+        busCss = getBusCss(oBusInfo);
+        bnCss = getBnCss(oBusInfo);
+        if (io == "i") {
+            _CarCount[idx] = _CarCount[idx] + 1;
+            bnCss = bnCss + " center";
+        }
+        $("<span class='" + bnCss + "'>" + oBusInfo.bn + "</span>").appendTo(bpnId);
+        $(busIconId).html("<div class='" + busCss + "'></div>");
+    }
+
+    function getBusCss(oBusInfo) {
+        busCss = "bh";
+        if (oBusInfo.bt == "0") {
+            busCss = "bh";
+        } else if (oBusInfo.bt == "1") {
+            busCss = "bl";
+        } else if (oBusInfo.bt == "2") {
+            busCss = "bf";
+        } else if (oBusInfo.bt == "3") {
+            busCss = "bo";
+        } else {
+            busCss = "bh";
+        }
+        return busCss;
+    }
+
+    function getBnCss(oBusInfo) {
+        bnCss = "bnh";
+        if (oBusInfo.bt == "0") {
+            bnCss = "bnh";
+        } else if (oBusInfo.bt == "1") {
+            bnCss = "bnl";
+        } else if (oBusInfo.bt == "2") {
+            bnCss = "bnf";
+        } else if (oBusInfo.bt == "3") {
+            bnCss = "bno";
+        } else {
+            bnCss = "bnh";
+        }
+        return bnCss;
+    }
+
+    function toEtaTw(eta) {
+        etaString = "";
+        if (eta == '-1') {
+            etaString = "未發車";
+        } else if (eta == '-2') {
+            etaString = "末班車<br />已駛離";
+        } else if (eta == '-3') {
+            etaString = "交管不停靠";
+        } else if (eta == '-4') {
+            etaString = "今日未營運";
+        } else if (eta < 3) {
+            etaString = "進站中";
+        } else {
+            etaString = "約" + eta + "分";
+        }
+        return etaString;
+    }
+
+    function getEtaCss(eta) {
+        etaCss = "eta";
+        if (eta == '-1') {
+            etaCss = "eta_nonop";
+        } else if (eta == '-2') {
+            etaCss = "eta_nonop";
+        } else if (eta == '-3') {
+            etaCss = "eta_nonop";
+        } else if (eta == '-4') {
+            etaCss = "eta_nonop";
+        } else if (eta < 3) {
+            etaCss = "eta_coming";
+        } else {
+            etaCss = "eta_onroad";
+        }
+        return etaCss;
+    }
+
+    function fetchRouteInfo() {
+        var jsDataUrl = _AptsSpringWebHome + '/EBus/GetStopDyns';
+
+        $.ajax({
+            url: jsDataUrl,
+            type: 'Get',
+            async: false,
+            cache: false,
+            data: { routeid: _uniRouteId, gb: _goBack },
+            dataType: 'json',
+            success: function (data) {
+                if (data.length < 1) {
+                    alert("error:" + data.msg);
+                    return;
+                }
+                $(".eta").html("");
+                $(".eta2").html("");
+                $(".busi").html("");
+                $(".busi2").html("");
+                $(".buso").html("");
+                $(".buso2").html("");
+                $(".bpni").html("");
+                $(".bpni2").html("");
+                $(".bpno").html("");
+                $(".bpno2").html("");
+                $(DOMPurify.sanitize(data)).each(function () {
+                    var sn = this.sn;
+                    _CarCount[this.sn] = 0;
+
+                    var floating = $("#block_" + sn).data("floating");
+                    var stopName = $("#block_" + sn).data("stop");
+                    //$("#sflag_" + sn).find('.stopIconYouBike').remove();
+                    //$("#sflag_" + sn).find('.stopIconNewBike').remove();
+                    //if (this.ub == '1') {
+                    //    //var bikeIcon = "<span class='stopIconYouBike' onclick=\"AptsBusMap.showBike(this, '" + stopName + "');\"></span>"; vic
+                    //    var bikeIcon = "<span class='stopIconYouBike' ></span>";
+                    //    $(bikeIcon).data("ano", this.ano).data("pno", this.pno).data("bitime", this.bitime).appendTo("#sflag_" + sn);
+                    //    //$("<span class='stopIconYouBike' onclick='showBike(this);'></span>").appendTo("#sflag_" + sn);
+                    //    //$("<div class='hidden'>站點名稱：台北火車站<br />可借車輛：20輛<br />可停車輛：10輛<br />查詢時間：20141007163010<br /></div>").appendTo("#sflag_" + sn);
+                    //}
+                    //if (this.ub == '3') {
+                    //    //var bikeIcon = "<span class='stopIconNewBike' onclick=\"AptsBusMap.showBike(this, '" + stopName + "');\"></span>"; vic
+                    //    var bikeIcon = "<span class='stopIconNewBike' ></span>";
+                    //    $(bikeIcon).data("ano", this.ano).data("pno", this.pno).data("bitime", this.bitime).appendTo("#sflag_" + sn);
+                    //    //$("<span class='stopIconNewBike' onclick='showBike(this);'></span>").appendTo("#sflag_" + sn);
+                    //    //$("<div class='hidden'>站點名稱：台北火車站<br />可借車輛：20輛<br />可停車輛：10輛<br />查詢時間：20141007163010<br /></div>").appendTo("#sflag_" + sn);
+                    //}
+
+                    $(this.bi).each(function () {
+                        displayBusTw2('i', sn, this);
+                    });
+                    $(this.bo).each(function () {
+                        displayBusTw2('o', sn, this);
+                    });
+
+                    if (_CarCount[this.sn] == 0) {
+                        etaiId = "#eta_" + sn;
+                        etaString = toEtaTw(this.eta);
+                        etaCss = getEtaCss(this.eta);
+                        $(etaiId).html("<span class='" + etaCss + "'>" + etaString + "</span>");
+                    }
+                });
+                //$(data.Buses).each(function () {
+                //    fnDisplayBus(this);
+                //});
+                var now = new Date();
+                var hour = now.getHours();
+                var minute = now.getMinutes();
+                var sec = now.getSeconds();
+                var updateAt = "更新時間：";
+                if (hour < 10)
+                    updateAt = updateAt + "0";
+                updateAt = updateAt + hour + "：";
+                if (minute < 10)
+                    updateAt = updateAt + "0";
+                updateAt = updateAt + minute + "：";
+                if (sec < 10)
+                    updateAt = updateAt + "0";
+                updateAt = updateAt + sec;
+
+                $("#plLastUpdateTime").html(updateAt);
+            }
+        });
+    }
+
+    function loadBusMap() {
+        var pvTwMapUrl = _AptsSpringWebHome + "/EBus/VsSimpleMap";
+        $.ajax({
+            url: pvTwMapUrl,
+            type: 'Get',
+            data: { id: _uniRouteId, gb: _goBack },
+            dataType: 'html',
+            success: function (data) {
+                $("#" + _mapContainerId).html(DOMPurify.sanitize(data));
+                initBusMap();
+            }
+        });
+    }
+
+    function startTimer() {
+        fetchRouteInfo();
+        _updateRouteInfoTimer = setInterval(AptsBusMap.doFetchRouteInfo, 15000);
+    }
+
+    function initBusMap() {
+        initRouteInfoToggle();
+        startTimer();
+    }
+
+    function endsWith(str, suffix) {
+        return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    }
+
+    return {
+        init: function (setting) {
+            _AptsSpringWebHome = setting.AptsSpringWebHome;
+            _uniRouteId = setting.uniRouteId;
+            _goBack = setting.goBack;
+            if (endsWith(_AptsSpringWebHome, "/")) {
+                _AptsSpringWebHome = _AptsSpringWebHome.substring(0, _AptsSpringWebHome.length - 1);
+            }
+        },
+        load: function (mapContainerId) {
+            _mapContainerId = mapContainerId;
+            _isAjaxLoading = true;
+            loadBusMap();
+        },
+        start: function () {
+            initBusMap();
+        },
+        doFetchRouteInfo: function () {
+            fetchRouteInfo();
+        },
+        changeGoBack: function (goBack) {
+            if (_goBack == goBack) {
+                return;
+            }
+            _goBack = goBack;
+            clearInterval(_updateRouteInfoTimer);
+            if (!_isAjaxLoading) {
+                window.location = _AptsSpringWebHome + "/EBus/VsSimpleMap?routeid=" + _uniRouteId + "&gb=" + _goBack;
+            } else {
+                loadBusMap();
+            }
+        },
+        showBike: function (bikeObj, stopName) {
+            var tipcontent = "<div><span class='tipTitle'>站點名稱：</span>" + stopName + "<span class='tipClose'>x</span></div>";
+            tipcontent = tipcontent + "<div><span class='tipTitle'>可借車輛：</span>" + $(bikeObj).data("ano") + "</div>";
+            tipcontent = tipcontent + "<div><span class='tipTitle'>可停車輛：</span>" + $(bikeObj).data("pno") + "</div>";
+            //tipcontent = tipcontent + "<div><span class='tipTitle'>查詢時間：</span>" + $(bikeObj).data("bitime") + "</div>";
+            var tip = $("<div class='tooltip'><div class='tipBody'>" + tipcontent + "</div></div>")
+            .css('top', '22px')
+            .css('left', '-5px');
+            $(tip).appendTo(bikeObj);
+
+            $('.tipClose').on('click', function () {
+                $(this).parent().parent().parent().remove();
+                return false;
+            });
+        }
+    }
+}());

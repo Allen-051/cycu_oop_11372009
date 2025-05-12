@@ -56,10 +56,16 @@ async def find_bus(route_id: str) -> pd:
         print("沒有成功抓取到任何站牌資訊。")
         return
 
-    # 儲存結果到桌面上的 CSV
+    def get_save_path(default_filename: str) -> str:
+        """詢問使用者要儲存的檔案路徑，若未輸入則使用預設路徑"""
+        user_input = input(f"請輸入儲存檔案的完整路徑 (預設: {default_filename}): ").strip()
+        return user_input if user_input else default_filename
+
+    # 儲存結果到使用者指定的路徑
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
-    output_file = os.path.join(desktop_path, f"bus_information_{route_id}.csv")
-    
+    default_output_file = os.path.join(desktop_path, f"bus_information_{route_id}.csv")
+    output_file = get_save_path(default_output_file)
+
     with open(output_file, mode="w", newline="", encoding="utf-8-sig") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["到站時間", "站牌編號", "站牌名稱", "站牌ID", "緯度", "經度"])

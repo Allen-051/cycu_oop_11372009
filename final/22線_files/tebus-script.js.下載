@@ -1,0 +1,159 @@
+﻿$(function () {
+    // ie8 SVG  
+    var fallback = function (index, attr) {
+        return this.src.substr(0, this.src.lastIndexOf(".")) + ".png";
+    }
+
+    if (!Modernizr.svg) {
+        $("img[src$='.svg']")
+                .attr("src", fallback);
+    }
+
+    customScrollbar();
+    registDialogCloseBtnAction();
+    $(".ui-dialog-titlebar").hide();
+
+    updateMarquee();
+});
+
+var cknCulture = '';
+
+// 跑馬燈
+function getMarquee() {
+
+    if (browsercheck() === false) {
+        return false;
+    }  
+
+    var currentLang = $.cookie("cknCulture");
+    var sessionStorageItem = "BreakingNews";
+
+    if (sessionStorage.getItem(sessionStorageItem) != null && currentLang === cknCulture) {
+        return JSON.parse(sessionStorage.getItem(sessionStorageItem));
+    } else {
+        cknCulture = currentLang;
+        $.ajax({
+            url: SitePath + 'Home/GetBreakingNewsAsync',
+            type: 'POST',
+            success: function (data) {
+                sessionStorage.removeItem(sessionStorageItem);
+                sessionStorage.setItem(sessionStorageItem, JSON.stringify(data));
+                updateMarquee();
+            },
+            error: function (error) {
+                $('.teBUS-marquee').html('');
+            }
+        });
+    }
+
+    //瀏覽器版本檢查
+    function browsercheck() {
+        var result = true;
+        var browserName = navigator.userAgent.toLowerCase();
+        var browserVer = (browserName.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [0, '0'])[1];
+
+        if (/msie/i.test(browserName) && !/opera/.test(browserName)) {
+            if (browserVer < 9) {
+                result = false;
+            }
+        }
+        return result;
+    }
+
+}
+function updateMarquee() {
+    var marquee = getMarquee();
+    if (typeof (marquee) !== 'undefined') {
+        var marqueeMsg = '';
+        $.each(marquee, function (idx, value) {
+            marqueeMsg += '<span>' + value.Message + '</span>';
+        });
+
+        var _duration = (12 - parseInt($('input:hidden[name=marqueeSpeed]').val())) * 1000 + 5000;
+
+        $('.teBUS-marquee2').html(marqueeMsg);
+        //$('.teBUS-marquee2').marquee({
+        //    //speed in milliseconds of the marquee
+        //    duration: _duration,
+        //    //gap in pixels between the tickers
+        //    gap: $('.teBUS-marquee2').width(),
+        //    //time in milliseconds before the marquee will start animating
+        //    delayBeforeStart: 0,
+        //    //'left' or 'right'
+        //    direction: 'left',
+        //    //true or false - should the marquee be duplicated to show an effect of continues flow
+        //    duplicated: true,
+        //    pauseOnHover: true,
+        //    allowCss3Support: true
+        //});
+    }
+
+}
+
+
+
+function registDialogCloseBtnAction() {
+    if ($('.teBus-dialog-close-icon').length === 0) return;
+    $(".teBus-dialog-close-icon").click(function () {
+        $(this).closest('.teBus-dialog-c').dialog("close");
+    });
+}
+
+function customScrollbar() {
+    var obj = null;
+    if ($('.auto-list-pool').length !== 0) obj = $('.auto-list-pool');
+    if ($('.phone-table-c').length !== 0) obj = $('.phone-table-c');
+    if (obj === null || $.fn.mCustomScrollbar === undefined) return;
+    obj.mCustomScrollbar({
+        scrollButtons: {
+            enable: true
+        },
+        advanced: {
+            updateOnContentResize: true
+        },
+        mouseWheelPixels: 300,
+        scrollInertia:200,
+        autoHideScrollbar: false
+    });
+}
+
+///多國語系
+jQuery(document).ready(function () {
+    var culture = localStorage.getItem('culture');
+    loadBundles($.cookie('cknCulture') || viccknCulture);
+});
+
+function loadBundles(lang) {
+    i18n.set({
+        'lang': lang,
+        'path': SitePath + 'jss/I18n/'
+    });
+}
+
+
+var dateTimeReviver = function (value) {
+    var a;
+    if (typeof value === 'string') {
+        a = /\/Date\((\d*)\)\//.exec(value);
+        if (a) {
+            return new Date(+a[1]);
+        }
+    }
+    return value;
+}
+
+Date.prototype.Format = function (fmt) { //author: meizz 
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "h+": this.getHours(), //小时 
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}

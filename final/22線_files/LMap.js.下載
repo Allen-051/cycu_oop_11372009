@@ -1,0 +1,191 @@
+﻿
+var StoplayerGroup;
+var BuslayerGroup;
+//紀錄Markers
+var overlays = [];
+var circlelays = [];
+var myloclayer;
+//目前位置icon
+var image = SitePath + "images/mapIcon/myLoc.png";
+
+var loclayerGroup=[];
+
+function initialize() {
+
+
+    map = L.map('map_canvas').setView([25.0484234, 121.5079416], 10);
+
+    if ($.cookie('cknCulture') == 'en') {
+        L.tileLayer('https://maps.nlsc.gov.tw/S_Maps/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=EMAP8&STYLE=_null&TILEMATRIXSET=EPSG:3857&TILEMATRIX=EPSG:3857:{z}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fpng', {
+            maxZoom: 18
+        }).addTo(map);
+    } else {
+        L.tileLayer('https://maps.nlsc.gov.tw/S_Maps/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=EMAP&STYLE=_null&TILEMATRIXSET=EPSG:3857&TILEMATRIX=EPSG:3857:{z}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fpng', {
+            maxZoom: 18
+        }).addTo(map);
+    }
+   
+    L.control.scale();
+    L.control.attribution({
+        //prefix: '<h3>Vic</h3>'
+    }).addTo(map);
+
+
+
+};
+
+//清空Markers
+//function clearMarkers() {
+//    if (StoplayerGroup != null) {
+//        StoplayerGroup.clearLayers();
+//    }
+//    while (overlays[0]) {
+//        overlays.pop();
+//    }
+//}
+
+function clearMarkers() {
+        if (StoplayerGroup != null) {
+            StoplayerGroup.clearLayers();
+        }
+    while (loclayerGroup[0]) {
+        loclayerGroup.pop().clearLayers();
+    }
+    while (overlays[0]) {
+        overlays.pop();
+    }
+}
+
+function setStationMarkers(marker) {
+    overlays.push(marker);
+}
+
+function setMarkers(lat, lng, title, html) {
+    var arMarker = [];
+    m = L.marker([lat, lng], { icon: L.icon({ iconUrl: SitePath + "images/mapIcon/station_bus.png", iconAnchor: [16, 32] }) });
+    m.bindPopup(html);
+    m.bindTooltip(title);
+    arMarker.push(m);
+    loclayerGroup.push(L.layerGroup(arMarker).addTo(map));
+   
+}
+
+//清空目前位置
+function clearNowLocMarkers() {
+    
+    map.removeLayer(myloclayer);
+}
+
+
+// 成功取得 Gears 定位
+function successCallback(position) {
+    mapServiceProvider(position.latitude, position.longitude);
+}
+
+function mapServiceProvider(latitude, longitude) {
+    map.flyTo([latitude, longitude],15);
+    setNowLocation([latitude, longitude], 0);
+}
+
+function centerMapTo(centerlat, centerlng) {
+    map.setView([centerlat, centerlng], 14);
+}
+
+//取得目前位置(IP.GPS)
+function getLocation() {
+    // 瀏覽器支援 HTML5 定位方法
+    if (navigator.geolocation) {
+        // HTML5 定位抓取
+        navigator.geolocation.getCurrentPosition(function (position) {
+            mapServiceProvider(position.coords.latitude, position.coords.longitude);
+        },
+        function (error) {
+            switch (error.code) {
+                case error.TIMEOUT:
+                    alert(i18n._('System is busy, please try again later'));
+                    break;
+
+                case error.POSITION_UNAVAILABLE:
+                    alert(i18n._('No access to current location'));
+                    break;
+
+                case error.PERMISSION_DENIED://拒絕
+                    alert(i18n._('Allow the browser to acquire your current location'));
+                    break;
+
+                case error.UNKNOWN_ERROR:
+                    alert(i18n._('System is busy, please try again later'));
+                    break;
+            }
+        });
+    } else { // 不支援 HTML5 定位
+        // 若支援 Google Gears
+        if (window.google && google.gears) {
+            try {
+                // 嘗試以 Gears 取得定位
+                var geo = google.gears.factory.create('beta.geolocation');
+                geo.getCurrentPosition(successCallback, errorCallback, { enableHighAccuracy: true, gearsRequestAddress: true });
+            } catch (e) {
+                alert(i18n._('System is busy, please try again later'));
+            }
+        } else {
+            alert(i18n._('No access to current location'));
+        }
+    }
+}
+
+
+// 取得 Gears 定位發生錯誤
+function errorCallback(err) {
+    switch (error.code) {
+        case 2:
+            alert(i18n._('Allow the browser to acquire your current location'));
+            break;
+        default:
+            alert(i18n._('Positioning Error'));
+            break;
+    }
+}
+
+
+
+//繪製圓形
+function DrawCircle(center, rad) {
+    clearCirclelays();
+    var circle = L.circle(center, {
+        color: '#A79529',
+        fillColor: '#FFF100',
+        fillOpacity: 0.5,
+        radius: rad
+    }).addTo(map);
+    circlelays=circle;
+}
+
+//目前位置
+function setNowLocation(position, range, html) {
+    var arMarker = [];
+    var GoStopsicon = L.icon({
+        iconUrl: image,
+        iconSize: [46, 46]
+    });
+    myloclayer = L.marker(position, { icon: GoStopsicon }).addTo(map);
+    //arMarker.push(m);
+   
+
+    DrawCircle(position, range);
+
+    //centerMapTo(position.lat(), position.lng());
+    //bindInfoWindow(marker, map, InfoWindow, html);
+
+    $("input[name='lat']").val(position[0]);
+    $("input[name='lng']").val(position[1]);
+    //nowLoc.push(marker);
+}
+
+
+function clearCirclelays() {
+    map.removeLayer(circlelays)
+    //while (circlelays[0]) {
+    //    circlelays.pop().clearLayers();
+    //}
+}

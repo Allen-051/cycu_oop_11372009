@@ -2,6 +2,11 @@ import asyncio
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
 import time
+import sys
+import io
+
+# 設定標準輸出為 UTF-8
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 async def fetch_ebus_snapshot():
     url = "https://ebus.gov.taipei/ebus"

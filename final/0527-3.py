@@ -2,10 +2,6 @@ from bs4 import BeautifulSoup
 import csv
 import os
 
-
-
-
-
 # 抓出所有ebus網站上公車路線所對應的id(數字)
 def extract_bus_routes_from_html(html_path, output_csv_path=None):
     # 開啟 HTML 檔案
@@ -42,5 +38,5 @@ def extract_bus_routes_from_html(html_path, output_csv_path=None):
     print(f"共擷取 {len(bus_data)} 筆資料，已儲存至：{output_csv_path}")
 
 # 呼叫主函數（請確認 HTML 路徑正確）
-html_path = r"C:\Users\User\Desktop\cycu_oop_11372009\final\ebus_taipei\大臺北公車.html"
+html_path = r"C:\Users\CYCU\Desktop\cycu_oop_11372009\final\ebus_taipei\大臺北公車.html"
 extract_bus_routes_from_html(html_path)

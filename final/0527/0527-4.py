@@ -4,7 +4,7 @@ import asyncio
 from bs4 import BeautifulSoup
 from playwright.async_api import async_playwright
 
-#  讀取路線代碼清單
+#  讀取路線代碼產生所有公車站牌id的清單
 def load_route_ids_from_csv(csv_path: str):
     route_list = []
     with open(csv_path, newline='', encoding='utf-8-sig') as f:
@@ -66,7 +66,7 @@ async def main_extract_all_stops(csv_input_path: str, csv_output_path: str):
 
 # 執行程式（手動設定路徑）
 if __name__ == "__main__":
-    input_csv = r"C:\Users\User\Desktop\taipei_bus_routes_with_direction.csv"  # 請換成你實際的路線代碼檔案
+    input_csv = r"C:\Users\CYCU\Desktop\taipei_bus_routes.csv"  # 請換成你實際的路線代碼檔案
     desktop = os.path.join(os.path.expanduser("~"), "Desktop")
     output_csv = os.path.join(desktop, "all_bus_stops_by_route.csv")
     asyncio.run(main_extract_all_stops(input_csv, output_csv))

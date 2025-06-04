@@ -10,43 +10,41 @@ async def get_lat_lon_from_html(route_id):
     根據路線代碼抓取站牌的經緯度
     """
     url = f"https://ebus.gov.taipei/Route/StopsOfRoute?routeid={route_id.strip()}"
-
-    async with async_playwright() as p:
-        browser = await p.chromium.launch()
-        page = await browser.new_page()
-        await page.goto(url)
-        await page.wait_for_selector("div#GoDirectionRoute li, div#BackDirectionRoute li", timeout=10000)
-        html = await page.content()
-        await browser.close()
-
-    soup = BeautifulSoup(html, "html.parser")
     all_stops_data = []
-
-    # 處理去程與返程站牌
-    for direction_label, selector in [("去程", "div#GoDirectionRoute li"), ("返程", "div#BackDirectionRoute li")]:
-        station_items = soup.select(selector)
-        if not station_items:
-            continue
-        for li in station_items:
-            try:
-                spans = li.select("span.auto-list-stationlist span")
-                inputs = li.select("input")
-
-                stop_name = spans[2].get_text(strip=True)
-                stop_id = inputs[0]['value']
-                latitude = inputs[1]['value']
-                longitude = inputs[2]['value']
-
-                all_stops_data.append({
-                    "方向": direction_label,
-                    "站牌名稱": stop_name,
-                    "站牌ID": stop_id,
-                    "緯度": latitude,
-                    "經度": longitude
-                })
-            except Exception as e:
-                print(f"抓取資料時發生錯誤：{e}")
-    
+    try:
+        async with async_playwright() as p:
+            browser = await p.chromium.launch()
+            page = await browser.new_page()
+            await page.goto(url, timeout=2_000_000)  # 設定超長timeout
+            await page.wait_for_selector("div#GoDirectionRoute li, div#BackDirectionRoute li", timeout=2_000_000)
+            html = await page.content()
+            await browser.close()
+        soup = BeautifulSoup(html, "html.parser")
+        # ...原本的資料擷取程式...
+        for direction_label, selector in [("去程", "div#GoDirectionRoute li"), ("返程", "div#BackDirectionRoute li")]:
+            station_items = soup.select(selector)
+            if not station_items:
+                continue
+            for li in station_items:
+                try:
+                    spans = li.select("span.auto-list-stationlist span")
+                    inputs = li.select("input")
+                    stop_name = spans[2].get_text(strip=True)
+                    stop_id = inputs[0]['value']
+                    latitude = inputs[1]['value']
+                    longitude = inputs[2]['value']
+                    all_stops_data.append({
+                        "方向": direction_label,
+                        "站牌名稱": stop_name,
+                        "站牌ID": stop_id,
+                        "緯度": latitude,
+                        "經度": longitude
+                    })
+                except Exception as e:
+                    print(f"抓取資料時發生錯誤：{e}")
+    except Exception as e:
+        print(f"⚠️ 路線 {route_id} 連線失敗或超時（略過）：{e}")
+        return []
     return all_stops_data
 
 # 儲存結果至 CSV
@@ -69,11 +67,11 @@ async def main(csv_input_path, csv_output_path):
 
     # 儲存至 CSV
     save_to_csv(all_stops_data, csv_output_path)
-    print(f"\n✅ 資料已儲存至：{csv_output_path}")
+    print(f"\n 資料已儲存至：{csv_output_path}")
 
 # 執行主程式
 if __name__ == "__main__":
-    csv_input_path = r"C:\Users\User\Desktop\cycu_oop_11372009\final\0527\taipei_bus_routes.csv"  # 讀取公車路線資料 CSV 檔
+    csv_input_path = r"C:\Users\CYCU\Desktop\cycu_oop_11372009\final\0527\taipei_bus_routes.csv"  # 讀取公車路線資料 CSV 檔
     desktop = os.path.join(os.path.expanduser("~"), "Desktop")
     csv_output_path = os.path.join(desktop, "bus_stops_with_lat_lon.csv")  # 輸出檔案到桌面
 

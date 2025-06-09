@@ -49,10 +49,11 @@ async def get_lat_lon_from_html(route_id):
 
 # 儲存結果至 CSV
 def save_to_csv(all_data, csv_output_path):
-    with open(csv_output_path, mode="w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.DictWriter(f, fieldnames=["方向", "站牌名稱", "站牌ID", "緯度", "經度"])
-        writer.writeheader()
-        writer.writerows(all_data)
+    import pandas as pd
+    df = pd.DataFrame(all_data)
+    # 只保留站牌名稱+站牌ID唯一的資料
+    df = df.drop_duplicates(subset=["站牌名稱", "站牌ID"])
+    df.to_csv(csv_output_path, index=False, encoding="utf-8-sig")
 
 # 主函數：遍歷每條公車路線，抓取經緯度並儲存
 async def main(csv_input_path, csv_output_path):
@@ -72,7 +73,14 @@ async def main(csv_input_path, csv_output_path):
 # 執行主程式
 if __name__ == "__main__":
     csv_input_path = r"C:\Users\CYCU\Desktop\cycu_oop_11372009\final\0527\taipei_bus_routes.csv"  # 讀取公車路線資料 CSV 檔
-    desktop = os.path.join(os.path.expanduser("~"), "Desktop")
-    csv_output_path = os.path.join(desktop, "bus_stops_with_lat_lon.csv")  # 輸出檔案到桌面
+    # 詢問使用者儲存檔案路徑，預設為桌面
+    save_path = input("請輸入結果儲存路徑（直接按Enter則預設為桌面）: ").strip()
+    if save_path == "":
+        desktop = os.path.join(os.path.expanduser("~"), "Desktop")
+        save_path = desktop
+        print(f"未輸入路徑，預設儲存於：{save_path}")
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
+    csv_output_path = os.path.join(save_path, "bus_stops_with_lat_lon.csv")  # 輸出檔案
 
     asyncio.run(main(csv_input_path, csv_output_path))

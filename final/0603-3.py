@@ -9,7 +9,7 @@ from playwright.async_api import async_playwright
 EARTH_RADIUS_KM = 6371.0
 
 # 資料來源檔案
-STOP_CSV_PATH = r"C:\Users\User\Desktop\cycu_oop_11372009\final\0527\all_bus_stops_by_route.csv"
+STOP_CSV_PATH = r"C:\Users\CYCU\Desktop\cycu_oop_11372009\final\0527\bus_stops_with_lat_lon.csv"
 
 # 計算兩點距離（公里）
 def haversine(lat1, lon1, lat2, lon2):
@@ -79,22 +79,24 @@ async def fetch_bus_routes(stop_id):
 
 # 從路線中擷取起點與終點之間的段落
 def get_direct_segment(route_df, start_name, end_name):
-    if start_name not in route_df["站名"].values or end_name not in route_df["站名"].values:
+    # 只取第一個出現的起點與終點，且順序正確
+    stops = route_df["站名"].tolist()
+    if start_name not in stops or end_name not in stops:
         return None
-    idx_start = route_df[route_df["站名"] == start_name].index[0]
-    idx_end = route_df[route_df["站名"] == end_name].index[0]
+    idx_start = stops.index(start_name)
+    idx_end = stops.index(end_name)
     if idx_start >= idx_end:
         return None
     return route_df.iloc[idx_start:idx_end + 1].reset_index(drop=True)
 
-# 計算段落總距離與時間
 def calculate_distance_and_time(segment_df):
     total_distance = 0
     for i in range(len(segment_df) - 1):
         lat1, lon1 = float(segment_df.iloc[i]["緯度"]), float(segment_df.iloc[i]["經度"])
         lat2, lon2 = float(segment_df.iloc[i+1]["緯度"]), float(segment_df.iloc[i+1]["經度"])
         total_distance += haversine(lat1, lon1, lat2, lon2)
-    estimated_time = (total_distance / 30) * 60 + get_mock_arrival_time(segment_df.iloc[0]["站名"])
+    # 公車時速 40km/hr
+    estimated_time = (total_distance / 40) * 60 + get_mock_arrival_time(segment_df.iloc[0]["站名"])
     return round(total_distance, 2), round(estimated_time, 1)
 
 # 主流程

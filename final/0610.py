@@ -86,22 +86,43 @@ def calculate_distance_and_time(segment):
     return total_distance, time_min
 
 # 即時抓取進站時間（Playwright）
-def fetch_arrival_time(stop_id, route_id):
-    url = f"https://ebus.gov.taipei/Stop/EstimatesOfStop?stopid={stop_id}&routeid={route_id}"
+def fetch_stop_time(route_id, direction, stop_name):
+    url = f"https://ebus.gov.taipei/Route/StopsOfRoute?routeid={route_id.strip()}"
+    html = None
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch()
+            browser = p.chromium.launch(headless=True)
             page = browser.new_page()
             page.goto(url)
-            page.wait_for_timeout(80000)
-            html = page.content()
-            browser.close()
-
-        soup = BeautifulSoup(html, "html.parser")
-        est = soup.select_one("div.arrival-time")
-        return est.get_text(strip=True) if est else "暫無資訊"
+            try:
+                page.wait_for_selector("div#GoDirectionRoute li, div#BackDirectionRoute li", timeout=80000)
+                html = page.content()
+            except Exception as e:
+                print(f"Playwright timeout: {e}")
+                return "網頁逾時"
+            finally:
+                browser.close()
     except Exception as e:
-        return f"錯誤：{e}"
+        print(f"Playwright error: {e}")
+        return "網頁逾時"
+
+    if not html:
+        return "網頁逾時"
+
+    soup = BeautifulSoup(html, "html.parser")
+    # direction 需與網頁一致，通常是「去程」或「返程」
+    if direction in ["去程", "正向"]:
+        station_items = soup.select("div#GoDirectionRoute li")
+    else:
+        station_items = soup.select("div#BackDirectionRoute li")
+    for li in station_items:
+        spans = li.select("span.auto-list-stationlist span")
+        if len(spans) >= 3:
+            stop = spans[2].get_text(strip=True)
+            if stop == stop_name:
+                stop_time = spans[0].get_text(strip=True)
+                return stop_time
+    return "查無"
     
 # Streamlit 主頁面
 st.title("台北市公車路線查詢")
@@ -207,10 +228,13 @@ if st.session_state.get("show_map") and st.session_state["direct_routes"]:
             st.components.v1.html(folium_html, height=600)
 
         # 顯示建議 + 預估進站時間
-        stop_id = segment.iloc[0]["站牌ID"]
         route_id = segment.iloc[0]["路線代碼"]
-        est_arrival_time = fetch_arrival_time(stop_id, route_id)
-        st.info(f"建議搭乘路線：{segment.iloc[0]['路線名稱']}，從「{start_name}」到「{end_name}」共 {len(segment)-1} 站，約 {round(total_distance)} 公尺，預估 {time_min} 分鐘。\n📍 起始站預估進站時間：{est_arrival_time}")
+        direction = segment.iloc[0]["方向"]
+        stop_time = fetch_stop_time(route_id, direction, start_name)
+        if stop_time:
+            st.info(f"建議搭乘路線：{segment.iloc[0]['路線名稱']}，從「{start_name}」到「{end_name}」共 {len(segment)-1} 站，約 {round(total_distance)} 公尺，預估 {time_min} 分鐘。\n\n📍 起始站即時到站資訊：{stop_time}")
+        else:
+            st.info(f"建議搭乘路線：{segment.iloc[0]['路線名稱']}，從「{start_name}」到「{end_name}」共 {len(segment)-1} 站，約 {round(total_distance)} 公尺，預估 {time_min} 分鐘。\n\n📍 起始站即時到站資訊：查無")
 
     except IndexError:
         st.error("無法比對起點與終點在該路線上的位置，請檢查資料。")

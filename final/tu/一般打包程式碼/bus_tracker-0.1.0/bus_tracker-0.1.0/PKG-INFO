@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: bus-tracker
+Version: 0.1.0
+Summary: 台北市公車路線查詢與轉乘建議系統
+Author-email: 第二組 <bryantu0111@gmail.com>
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: streamlit
+Requires-Dist: pandas
+Requires-Dist: folium
+Requires-Dist: playwright
+Requires-Dist: beautifulsoup4
+Requires-Dist: streamlit-folium
+
+# 台北市公車動態查詢系統
+
+本公車爬蟲程式碼由中原大學土木工程系 OOP 第二組製作
+組員:
+土木碩一 11372004周芷琦
+土木碩一 11372009邱昱倫
+土木碩一 11372011涂子彧
+土木碩一 11372013羅于翔
+
+主要功能:提供台北市公車直達與轉乘路線查詢，支援 Folium 地圖顯示與即時到站預測。
+
+---
+
+## 📦 套件安裝方式
+
+請先安裝 Python 3.9+，再在終端機執行以下指令安裝本套件：
+
+## ⚠️ 注意事項
+
+請不要直接點擊 bus_app.py 執行，請使用終端機執行以下指令：
+
+```bash
+streamlit run bus_tracker/bus_app.py
+
+
+```bash
+pip install bus_tracker-0.1.0.tar.gz

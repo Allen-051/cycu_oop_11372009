@@ -1,0 +1,24 @@
+[project]
+name = "bus-tracker"
+version = "0.1.0"
+description = "台北市公車路線查詢與轉乘建議系統"
+authors = [
+  { name="第二組", email="bryantu0111@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "streamlit",
+  "pandas",
+  "folium",
+  "playwright",
+  "beautifulsoup4",
+  "streamlit-folium"
+]
+
+[tool.setuptools.package-data]
+"bus_tracker" = ["*.csv"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
